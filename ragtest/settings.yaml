@@ -6,36 +6,36 @@
 
 models:
   default_chat_model:
-    type: openai_chat # or azure_openai_chat
-    # api_base: https://<instance>.openai.azure.com
+    type: local_llm_chat # or azure_openai_chat || local_llm_chat || openai_chat
+    api_base: http://localhost:11434/v1
     # api_version: 2024-05-01-preview
     auth_type: api_key # or azure_managed_identity
-    api_key: ${GRAPHRAG_API_KEY} # set this in the generated .env file
+    # api_key: ${GRAPHRAG_API_KEY} # set this in the generated .env file
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
-    model: gpt-4-turbo-preview
+    model: deepseek-r1:1.5b
     # deployment_name: <azure_model_deployment_name>
     # encoding_model: cl100k_base # automatically set by tiktoken if left undefined
     model_supports_json: true # recommended if this is available for your model.
-    concurrent_requests: 25 # max number of simultaneous LLM requests allowed
+    concurrent_requests: 5 # max number of simultaneous LLM requests allowed
     async_mode: threaded # or asyncio
     retry_strategy: native
     max_retries: -1                   # set to -1 for dynamic retry logic (most optimal setting based on server response)
     tokens_per_minute: 0              # set to 0 to disable rate limiting
     requests_per_minute: 0            # set to 0 to disable rate limiting
   default_embedding_model:
-    type: openai_embedding # or azure_openai_embedding
-    # api_base: https://<instance>.openai.azure.com
+    type: local_embedding # or azure_openai_embedding
+    api_base: http://localhost:11434/api
     # api_version: 2024-05-01-preview
-    auth_type: api_key # or azure_managed_identity
-    api_key: ${GRAPHRAG_API_KEY}
+    # auth_type: api_key # or azure_managed_identity
+    # api_key: ${GRAPHRAG_API_KEY}
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
-    model: text-embedding-3-small
+    model: nomic-embed-text:latest
     # deployment_name: <azure_model_deployment_name>
     # encoding_model: cl100k_base # automatically set by tiktoken if left undefined
     model_supports_json: true # recommended if this is available for your model.
-    concurrent_requests: 25 # max number of simultaneous LLM requests allowed
+    concurrent_requests: 5 # max number of simultaneous LLM requests allowed
     async_mode: threaded # or asyncio
     retry_strategy: native
     max_retries: -1                   # set to -1 for dynamic retry logic (most optimal setting based on server response)
